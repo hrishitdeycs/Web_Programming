@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio</title>
+<style>
+/* Base & Reset */
+body, h1, h2, h3, p, ul, ol, li, a, label {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    line-height: 1.6;
+    color: #333;
+    position: relative;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    position: relative;
+}
+header h1 { 
+    font-size: 50px; 
+    margin-bottom: 10px; 
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    position: relative;
+}
+header h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 6px;
+    background: linear-gradient(90deg, #ff6a00, #ffcd00);
+    margin: 10px auto 0 auto;
+    border-radius: 3px;
+}
+header p { 
+    font-size: 20px; 
+    font-style: italic; 
+    color: #e0e0e0; 
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+
+/* Hamburger Menu */
+#menu-toggle { display: none; }
+
+nav {
+    position: fixed;
+    top: 20px;
+    left: 65px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    padding: 10px 20px;
+    z-index: 100;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+nav a {
+    display: block;
+    margin: 10px 0;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+nav a:hover {
+    background: #6a11cb;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+nav a:first-child { margin-left: 5px; }
+
+.menu-label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    background: white;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px;
+}
+.menu-label span {
+    display: block;
+    height: 4px;
+    width: 60%;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Checkbox hack */
+#menu-toggle:checked + nav { max-height: 500px; padding: 15px 20px; }
+#menu-toggle:checked + nav + label span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); }
+#menu-toggle:checked + nav + label span:nth-child(2) { opacity: 0; }
+#menu-toggle:checked + nav + label span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+
+/* Sections */
+section {
+    background-color: white;
+    margin: 40px auto;
+    padding: 50px 40px;
+    max-width: 900px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    position: relative;
+    transition: box-shadow 0.3s ease;
+}
+section:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+
+section::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(106,17,203,0.1);
+    border-radius: 50%;
+    top: -15px;
+    left: -15px;
+    z-index: 0;
+}
+section h2 { 
+    font-size: 34px; 
+    text-align: center; 
+    margin-bottom: 25px; 
+    color: #6a11cb; 
+    position: relative;
+    z-index: 1;
+}
+section hr {
+    border: 0;
+    height: 2px;
+    background: #2575fc;
+    width: 80px;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+/* About */
+#about img {
+    display: block;
+    margin: 20px auto;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid #2575fc;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#about img:hover { 
+    transform: scale(1.08); 
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+#about p { 
+    text-align: center; 
+    font-size: 18px; 
+    margin-top: 20px; 
+}
+#about span { color: #6a11cb; font-weight: bold; }
+
+/* Skills */
+#skills ul, #skills ol { 
+    max-width: 700px; 
+    margin: 15px auto; 
+    padding-left: 20px; 
+    font-size: 18px; 
+}
+#skills h3 { text-align: center; margin-top: 25px; color: #2575fc; }
+#skills ul li:hover,
+#skills ol li:hover {
+    color: #6a11cb;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+/* Projects (Static text only) */
+#projects p { 
+    text-align: center; 
+    margin-top: 10px; 
+    font-size: 16px; 
+    color: #555; 
+    line-height: 1.8;
+}
+#projects ul {
+    max-width: 700px;
+    margin: 20px auto;
+    padding-left: 20px;
+    font-size: 18px;
+    list-style-type: disc;
+}
+/* ← FIXED: Make project list items turn purple on hover */
+#projects ul li:hover {
+    color: #6a11cb;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+/* Education */
+#education ul {
+    max-width: 700px;
+    margin: 15px auto;
+    padding-left: 20px;
+    font-size: 18px;
+    list-style-type: none;
+}
+
+#education ul li {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+#education ul li:hover {
+    color: #6a11cb;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+#education .course {
+    font-weight: bold;
+}
+
+#education .institution {
+    font-style: italic;
+}
+
+#education .details span {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Connect Icons */
+.icon-links {
+    text-align: center;
+    margin-top: 15px;
+}
+.icon-links a {
+    display: inline-block;
+    margin: 0 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.icon-links a:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    color: white;
+    text-align: center;
+    padding: 30px 10px;
+    margin-top: 50px;
+}
+footer small { 
+    display: block; 
+    margin-top: 10px; 
+    color: #ffeaa7; 
+}
+
+/* Arrows */
+.arrow {
+    position: fixed;
+    right: 20px;
+    font-size: 30px;
+    color: #6a11cb;
+    background: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 200;
+    animation: bounce 2s infinite;
+    transition: background 0.3s, color 0.3s;
+}
+.arrow:hover { background: #6a11cb; color: white; }
+.arrow-top { bottom: 80px; }
+.arrow-bottom { bottom: 20px; }
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+    60% { transform: translateY(-7px); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header h1 { font-size: 36px; }
+    .menu-label { width: 40px; height: 40px; padding: 7px; }
+    .menu-label span { height: 3px; width: 60%; }
+    nav { left: 55px; padding-left: 15px; }
+    .arrow { font-size: 26px; width: 45px; height: 45px; line-height: 45px; }
+    section { padding: 40px 20px; }
+}
+#skills {
+    padding: 20px;
+}
+
+.skills-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.skill-category {
+    flex: 1;
+    min-width: 250px;
+}
+
+.skill-category h3 {
+    margin-bottom: 10px;
+}
+
+.skill-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.skill-category ul li {
+    background: #f3f3f3;
+    margin: 5px 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>My Portfolio</h1>
+    <p>Welcome to my personal website</p>
+</header>
+
+<!-- Hamburger Menu -->
+<input type="checkbox" id="menu-toggle" />
+<nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#connect">Connect</a>
+</nav>
+<label for="menu-toggle" class="menu-label">
+    <span></span>
+    <span></span>
+    <span></span>
+</label>
+
+<main>
+    <section id="about">
+    <h2>About Me</h2>
+    <hr />
+    <img src="D:\IMG-20240909-WA0027.jpg" alt="Profile Image" />
+    <p>
+        Hello! My name is <strong>Hrishit Dey</strong>.<br />
+        Motivated and dedicated second-year B.Sc. (Hons.) Computer Science student with a strong interest in data science and emerging technologies.<br />
+        Eager to apply theoretical knowledge in practical settings through academic projects and internships.<br />
+        Currently learning <span>Web Programming</span> and building creative websites.
+    </p>
+    </section>
+
+    <section id="education">
+    <h2>Education</h2>
+    <hr />
+    <ul>
+        <!-- Bachelor's Degree -->
+        <li>
+            <div class="course">Bachelor of Science(Hons.) in Computer Science</div>
+            <div class="institution">Ramanujan College, Delhi University</div>
+            <div class="details">
+                <span>Expected Graduation: 2027</span> | 
+                <span>Year 1 CGPA: 8.73</span> | 
+                <span>Sem 3 SGPA: 9.09</span>
+            </div>
+        </li>
+
+        <!-- Class 12 -->
+        <li>
+            <div class="course">Class 12 - CBSE</div>
+            <div class="institution">Bholananda National Vidyalaya, Kolkata, West Bengal</div>
+            <div class="details">
+                <span>Year of Passing: 2024</span> | 
+                <span>Percentage: 83.8%(Science)</span>
+            </div>
+        </li>
+
+        <!-- Class 10 -->
+        <li>
+            <div class="course">Class 10 - ICSE</div>
+            <div class="institution">Modern English Academy, Kolkata, West Bengal</div>
+            <div class="details">
+                <span>Year of Passing: 2022</span> | 
+                <span>Percentage: 95.6%</span>
+            </div>
+        </li>
+    </ul>
+    </section>
+
+    <section id="skills">
+    <h2>Skills</h2>
+    <hr />
+
+    <div class="skills-container">
+        <div class="skill-category">
+            <h3>💻 Technical Skills</h3>
+            <ul>
+                <li>C</li>
+                <li>C++</li>
+                <li>Java</li>
+                <li>Python</li>
+                <li>Prolog</li>
+                <li>HTML</li>
+                <li>CSS</li>
+            </ul>
+        </div>
+
+        <div class="skill-category">
+            <h3>🤝 Soft Skills</h3>
+            <ul>
+                <li>Communication</li>
+                <li>Teamwork</li>
+                <li>Time Management</li>
+                <li>Consistency</li>
+            </ul>
+        </div>
+    </div>
+    </section>
+
+    <section id="projects">
+    <h2>Projects</h2>
+    <hr />
+    <p>Here are some projects I’ve worked on:</p>
+    <ul>
+        <li>
+            Personal Portfolio Website – static HTML & CSS design
+            [<a href="https://github.com/hrishitdeycs/Web_Programming" target="_blank">Code</a>]
+        </li>
+        <li>
+            Memory Leak Detector – implemented using C++
+            [<a href="https://github.com/hrishitdeycs/Cpp_programs/blob/main/solo_project.cpp" target="_blank">Code</a> | <a href="https://github.com/hrishitdeycs/Cpp_programs/blob/main/solo_project.md" target="_blank">Output</a>]
+        </li>
+        <li>
+            Slab Allocator Simulation – implemented using C++
+            [<a href="https://github.com/hrishitdeycs/Cpp_programs/blob/main/group_project.cpp" target="_blank">Code</a> | <a href="https://github.com/hrishitdeycs/Cpp_programs/blob/main/group_project.md" target="_blank">Documentation</a>]
+        </li>
+    </ul>
+    </section>
+
+    <section id="connect">
+        <h2>Connect with Me</h2>
+        <hr />
+        <div class="icon-links">
+            <a href="https://github.com/hrishitdeycs" target="_blank" title="GitHub">
+                <svg height="40" width="40" viewBox="0 0 16 16" fill="#333" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 012 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/hrishit-dey-b49a52372/" target="_blank" title="LinkedIn">
+                <svg height="40" width="40" viewBox="0 0 24 24" fill="#0077b5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0zM7.09 20.45H3.55V9h3.54v11.45zM5.32 7.54c-1.13 0-2.05-.92-2.05-2.05 0-1.13.92-2.05 2.05-2.05 1.13 0 2.05.92 2.05 2.05 0 1.13-.92 2.05-2.05 2.05zM20.45 20.45h-3.54v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3.54V9h3.4v1.56h.05c.47-.88 1.62-1.8 3.33-1.8 3.56 0 4.21 2.34 4.21 5.38v6.28z"/>
+                </svg>
+            </a>
+            <a href="mailto:hrishitdey@gmail.com" title="Email">
+                <svg height="40" width="40" viewBox="0 0 24 24" fill="#e34c26" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12.713l-11.99-7.713h23.98l-11.99 7.713zm0 2.574l-12-7.99v14.503h24V7.297l-12 7.99z"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <small>© 2026 Hrishit Dey. All rights reserved.</small>
+    <small>“Learning. Coding. Growing.”</small>
+</footer>
+<!-- Scroll Arrows -->
+<a href="#about" class="arrow arrow-top">&#8679;</a>
+<a href="#projects" class="arrow arrow-bottom">&#8681;</a>
+
+</body>
+</html>

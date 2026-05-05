@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Events Demo</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body style="background-color: red; text-align: center; padding-top: 100px;">
+    <a id="mylink" href="https://ramanujancollege.ac.in/" target="_blank" style="font-size: 20px;">
+        It shows the mouse events
+    </a>
+    <script>
+        // Mouse Over Event
+        $("#mylink").mouseover(function(){
+            $("body").css("background-color", "green");
+            $(this).text("I'm green now");
+        });
+        // Mouse Out Event
+        $("#mylink").mouseout(function(){
+            $("body").css("background-color", "red");
+            $(this).text("I'm red now");
+        });
+    </script>
+</body>
+</html>

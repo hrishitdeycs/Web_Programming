@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Button Click Example</title>
+    <!-- Load jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h2 id="text">Original Text</h2>
+    <button id="btn1">Change Text</button>
+    <button id="btn2">Change Color</button>
+    <script>
+        // Change text on button click
+        $("#btn1").click(function(){
+            $("#text").text("Text has been changed!");
+        });
+        // Change text color on button click
+        $("#btn2").click(function(){
+            $("#text").css("color", "red");
+        });
+    </script>
+</body>
+</html>

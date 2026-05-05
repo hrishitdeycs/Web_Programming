@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Selectors Demo</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h2 id="myId">This is ID selector</h2>
+    <div class="myClass">This is CLASS selector</div>
+    <p>This is ELEMENT selector (paragraph)</p>
+    <input type="text" placeholder="Text input field">
+    <script>
+        // 1. Select by ID
+        $("#myId").css("color", "red");
+        // 2. Select by Class
+        $(".myClass").css("background-color", "yellow");
+        // 3. Select by Element (tag name)
+        $("p").css("font-size", "20px");
+        // 4. Select by Attribute
+        $("[type='text']").css("border", "2px solid blue");
+    </script>
+</body>
+</html>

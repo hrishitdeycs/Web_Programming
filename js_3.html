@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Textbox Focus Color Change</title>
+</head>
+<body>
+    <h2>Click inside the textbox</h2>
+    <input type="text" id="myTextbox"
+           onfocus="changeColor()"
+           onblur="resetColor()"
+           placeholder="Click me">
+    <script>
+        function changeColor() {
+            document.getElementById("myTextbox").style.backgroundColor = "lightblue";
+        }
+        function resetColor() {
+            document.getElementById("myTextbox").style.backgroundColor = "white";
+        }
+    </script>
+</body>
+</html>

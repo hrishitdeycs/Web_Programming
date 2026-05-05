@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Form</title>
+</head>
+<body>
+<h2>Student Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+    Roll Number: <input type="text" id="roll"><br><br>
+    Name: <input type="text" id="name"><br><br>
+    Address:<br>
+    <textarea id="address"></textarea><br><br>
+
+    Course:
+    <select id="course">
+        <option value="">Select</option>
+        <option>BCA</option>
+        <option>BBA</option>
+        <option>BTech</option>
+    </select><br><br>
+
+    Gender:
+    <input type="radio" name="gender" value="male"> Male
+    <input type="radio" name="gender" value="female"> Female<br><br>
+
+    Hobbies:
+    <input type="checkbox" value="reading"> Reading
+    <input type="checkbox" value="sports"> Sports<br><br>
+
+    Date of Birth: <input type="date" id="dob"><br><br>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>
+
+<script>
+
+function validateRoll() {
+    var roll = document.getElementById("roll").value;
+    var rollPattern = /^[0-9]{7}$/;
+
+    if (!rollPattern.test(roll)) {
+        alert("Roll number must be a 7-digit numeric value");
+        return false;
+    }
+    return true;
+}
+
+function validateName() {
+    var name = document.getElementById("name").value;
+    var namePattern = /^[A-Za-z\s]+$/;
+
+    if (!namePattern.test(name)) {
+        alert("Name should contain only alphabets");
+        return false;
+    }
+    return true;
+}
+
+function validateDOB() {
+    var dob = document.getElementById("dob").value;
+
+    if (dob === "") {
+        alert("Enter Date of Birth");
+        return false;
+    }
+    return true;
+}
+
+function validateForm() {
+
+    if (!validateRoll()) {
+        return false;
+    }
+
+    if (!validateName()) {
+        return false;
+    }
+
+    if (!validateDOB()) {
+        return false;
+    }
+
+    alert("Form submitted");
+    return true;
+}
+
+</script>
+</body>
+</html>

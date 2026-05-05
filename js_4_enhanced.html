@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+
+    Roll Number:
+    <input type="text" id="roll"><br><br>
+
+    Name:
+    <input type="text" id="name"><br><br>
+
+    Address:<br>
+    <textarea id="address"></textarea><br><br>
+
+    Course:
+    <select id="course">
+        <option value="">Select</option>
+        <option value="BCA">BCA</option>
+        <option value="BBA">BBA</option>
+        <option value="BTech">BTech</option>
+    </select><br><br>
+
+    Gender:
+    <input type="radio" name="gender" value="male"> Male
+    <input type="radio" name="gender" value="female"> Female<br><br>
+
+    Hobbies:
+    <input type="checkbox" name="hobby" value="reading"> Reading
+    <input type="checkbox" name="hobby" value="sports"> Sports<br><br>
+
+    Date of Birth:
+    <input type="date" id="dob"><br><br>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+</form>
+
+<script>
+
+// Roll Number Validation
+function validateRoll() {
+    var roll = document.getElementById("roll").value;
+    var pattern = /^[0-9]{7}$/;
+
+    if (roll === "") {
+        alert("Roll number cannot be empty");
+        return false;
+    }
+    if (!pattern.test(roll)) {
+        alert("Roll number must be a 7-digit numeric value");
+        return false;
+    }
+    return true;
+}
+
+// Name Validation
+function validateName() {
+    var name = document.getElementById("name").value;
+    var pattern = /^[A-Za-z\s]+$/;
+
+    if (name === "") {
+        alert("Name cannot be empty");
+        return false;
+    }
+    if (!pattern.test(name)) {
+        alert("Name should contain only alphabets");
+        return false;
+    }
+    return true;
+}
+
+// Address Validation
+function validateAddress() {
+    var address = document.getElementById("address").value;
+
+    if (address.trim() === "") {
+        alert("Address cannot be empty");
+        return false;
+    }
+    return true;
+}
+
+// Course Validation
+function validateCourse() {
+    var course = document.getElementById("course").value;
+
+    if (course === "") {
+        alert("Please select a course");
+        return false;
+    }
+    return true;
+}
+
+// Gender Validation
+function validateGender() {
+    var gender = document.getElementsByName("gender");
+    var selected = false;
+
+    for (var i = 0; i < gender.length; i++) {
+        if (gender[i].checked) {
+            selected = true;
+            break;
+        }
+    }
+
+    if (!selected) {
+        alert("Please select gender");
+        return false;
+    }
+    return true;
+}
+
+// Hobbies Validation
+function validateHobbies() {
+    var hobbies = document.getElementsByName("hobby");
+    var selected = false;
+
+    for (var i = 0; i < hobbies.length; i++) {
+        if (hobbies[i].checked) {
+            selected = true;
+            break;
+        }
+    }
+
+    if (!selected) {
+        alert("Please select at least one hobby");
+        return false;
+    }
+    return true;
+}
+
+// DOB Validation
+function validateDOB() {
+    var dob = document.getElementById("dob").value;
+
+    if (dob === "") {
+        alert("Date of Birth cannot be empty");
+        return false;
+    }
+    return true;
+}
+
+// Main Validation Function
+function validateForm() {
+
+    if (!validateRoll()) return false;
+    if (!validateName()) return false;
+    if (!validateAddress()) return false;
+    if (!validateCourse()) return false;
+    if (!validateGender()) return false;
+    if (!validateHobbies()) return false;
+    if (!validateDOB()) return false;
+
+    alert("Form submitted successfully!");
+    return true;
+}
+
+</script>
+
+</body>
+</html>
